@@ -36,7 +36,7 @@ def show_app(index):
     )
     if st.button("Save"):
         save_changes(index, female_centric)
-        st.experimental_rereun()
+        st.experimental_rerun()
         st.success("Changes saved successfully!")
         
         
