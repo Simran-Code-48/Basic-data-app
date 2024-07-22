@@ -16,16 +16,32 @@ apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
 if 'index' not in st.session_state:
     st.session_state.index = 0
 
+
+# Function to save the updated data to the CSV file
+def save_changes(index, female_centric):
+    data.at[index, 'female_centric'] = female_centric
+    data.to_csv(csv_file_path, index=False)
+    
 def show_app(index):
     app = apps[index]
     st.title(app["title"])
     st.write(f"**Category:** {app['category']}")
     st.write(f"**Description:** {app['description']}")
     st.write(f"**Female centric:** {app['female_centric']}")
+    # female_centric = st.radio(
+    #     "Is this App Female centric?",
+    #     ["Yes", "No"],
+    #     captions=["Female centric", "Non-female centric"])
     female_centric = st.radio(
         "Is this App Female centric?",
-        ["Yes", "No"],
-        captions=["Female centric", "Non-female centric"])
+        [True, False],
+        format_func=lambda x: "Female centric" if x else "Non-female centric",
+        index=0 if app.get('female_centric', False) else 1
+    )
+    if st.button("Save"):
+        save_changes(index, female_centric)
+        st.success("Changes saved successfully!")
+        
     return female_centric
 
 def next_app():
