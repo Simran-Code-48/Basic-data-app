@@ -29,7 +29,11 @@ def next_app():
 def prev_app():
     if st.session_state.index > 0:
         st.session_state.index -= 1
-
+        
+female_centric = st.radio(
+    "Is this App Female centric ? ",
+    ["Yes", "No"],
+    captions = ["Female Centric", "Not female centric"])
 # Display current app
 female_centric = show_app(st.session_state.index)
 
