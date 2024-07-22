@@ -1,19 +1,13 @@
-# :earth_americas: GDP dashboard template
+# Top Apps Dashboard
 
-A simple Streamlit app showing the GDP of different countries in the world.
+A Streamlit application to manage and display information about top apps, including their category, description, and whether they are female-centric. This app allows users to view app details, mark apps as female-centric or non-female-centric, and save these changes to a CSV file.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gdp-dashboard-template.streamlit.app/)
+## How to Run the App
 
-### How to run it on your own machine
+1. **Install the Required Packages**
 
-1. Install the requirements
+   Create a `requirements.txt` file with the following content:
 
-   ```
-   $ pip install -r requirements.txt
-   ```
-
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+   ```txt
+   streamlit
+   pandas
