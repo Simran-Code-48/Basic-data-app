@@ -1,11 +1,17 @@
 import streamlit as st
+import pandas as pd
 
-# Sample data for apps
-apps = [
-    {"title": "App1", "category": "Category1", "description": "Description1"},
-    {"title": "App2", "category": "Category2", "description": "Description2"},
-    {"title": "App3", "category": "Category3", "description": "Description3"},
-]
+# Read CSV data
+@st.cache
+def load_data(file_path):
+    return pd.read_csv(file_path)
+
+# Load the data
+csv_file_path = 'top_apps_IN.csv'  # Update with the correct file path
+data = load_data(csv_file_path)
+
+# Convert the DataFrame to a list of dictionaries
+apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
 
 # Initialize session state for app index
 if 'index' not in st.session_state:
@@ -42,4 +48,3 @@ with col2:
     if st.button("Next"):
         next_app()
         st.experimental_rerun()
-
