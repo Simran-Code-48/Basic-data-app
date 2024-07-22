@@ -7,18 +7,14 @@ def load_data(file_path):
     return pd.read_csv(file_path)
 
 # Load the data
-csv_file_path = 'top_apps_IN.csv'  # Update with the correct file path
+csv_file_path = 'top_apps_IN_with_female_centric.csv'  # Update with the correct file path
 data = load_data(csv_file_path)
-
-if 'female_centric' not in data.columns:
-    data['female_centric'] = False
 
 apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
 
 # Initialize session state for app index
 if 'index' not in st.session_state:
     st.session_state.index = 0
-
 
 # Function to save the updated data to the CSV file
 def save_changes(index, female_centric):
