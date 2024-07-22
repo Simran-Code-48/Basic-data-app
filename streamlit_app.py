@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-from bs4 import BeautifulSoup
-from unidecode import unidecode
+import BeautifulSoup as bs4
+import unidecode as unidecode
 
 # Read CSV data
 @st.cache
