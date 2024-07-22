@@ -25,8 +25,7 @@ def show_app(index):
    female_centric = st.radio(
         "Is this App Female centric?",
         ["Yes", "No"],
-        captions=["Female centric", "Non-female centric"]
-   )
+        captions=["Female centric", "Non-female centric"])
     return female_centric
 
 def next_app():
