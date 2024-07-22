@@ -36,6 +36,7 @@ def show_app(index):
         "Is this App Female centric?",
         [True, False],
         format_func=lambda x: "Female centric" if x else "Non-female centric",
+        captions=["Female centric", "Non-female centric"],
         index=0 if app.get('female_centric', False) else 1
     )
     if st.button("Save"):
