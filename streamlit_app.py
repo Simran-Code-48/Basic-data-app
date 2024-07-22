@@ -22,7 +22,7 @@ def show_app(index):
     st.write(f"**Category:** {app['category']}")
     st.write(f"**Description:** {app['description']}")
     
-   female_centric = st.radio(
+    female_centric = st.radio(
         "Is this App Female centric?",
         ["Yes", "No"],
         captions=["Female centric", "Non-female centric"])
