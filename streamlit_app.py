@@ -19,8 +19,20 @@ if 'index' not in st.session_state:
 
 # Function to save the updated data to the CSV file
 def save_changes(index, female_centric):
-    data.at[index, 'female_centric'] = female_centric
-    data.to_csv(csv_file_path)
+    st.write(f"Saving changes at index {index} with female_centric={female_centric}")
+    
+    # Ensure correct row is being updated
+    app_name = apps[index]['title']
+    data_index = data[data['appName'] == app_name].index[0]
+    
+    # Update the DataFrame
+    data.at[data_index, 'female_centric'] = female_centric
+    
+    # Debug statement
+    st.write(f"Updated DataFrame row:\n{data.loc[data_index]}")
+    
+    # Save to CSV
+    data.to_csv(csv_file_path, index=False)
     
 def show_app(index):
     app = apps[index]
