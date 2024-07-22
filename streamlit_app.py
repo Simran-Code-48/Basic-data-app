@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import time
 
 # Read CSV data
 def load_data(file_path):
@@ -36,9 +37,9 @@ def show_app(index):
     )
     if st.button("Save"):
         save_changes(index, female_centric)
-        st.experimental_rerun()
         st.success("Changes saved successfully!")
-        
+        time.sleep(5)  # Wait for 5 seconds
+        st.experimental_rerun() 
         
     return female_centric
 
