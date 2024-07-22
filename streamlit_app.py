@@ -20,7 +20,7 @@ if 'index' not in st.session_state:
 # Function to save the updated data to the CSV file
 def save_changes(index, female_centric):
     data.at[index, 'female_centric'] = female_centric
-    data.to_csv(csv_file_path, index=False)
+    data.to_csv(csv_file_path)
     
 def show_app(index):
     app = apps[index]
