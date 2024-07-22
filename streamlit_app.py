@@ -19,13 +19,13 @@ def show_app(index):
     st.title(app["title"])
     st.write(f"**Category:** {app['category']}")
     st.write(f"**Description:** {app['description']}")
-    female_centric = st.radio(
-        "Is this App Female centric ? ",
-        ["Yes", "No"],
-        captions = ["Female Centric", "Not female centric"])
-    # Display current app
-    female_centric = show_app(st.session_state.index)
-    # female_centric1 = st.selectbox("Female Centric", ["Yes", "No"])
+    # female_centric = st.radio(
+    #     "Is this App Female centric ? ",
+    #     ["Yes", "No"],
+    #     captions = ["Female Centric", "Not female centric"])
+    # # Display current app
+    # female_centric = show_app(st.session_state.index)
+    female_centric1 = st.selectbox("Female Centric", ["Yes", "No"])
     return female_centric
 
 def next_app():
