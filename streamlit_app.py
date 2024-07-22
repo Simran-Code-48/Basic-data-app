@@ -25,7 +25,7 @@ def show_app(index):
         captions = ["Female Centric", "Not female centric"])
     # Display current app
     female_centric = show_app(st.session_state.index)
-    female_centric1 = st.selectbox("Female Centric", ["Yes", "No"])
+    # female_centric1 = st.selectbox("Female Centric", ["Yes", "No"])
     return female_centric
 
 def next_app():
