@@ -32,8 +32,9 @@ def show_app(index):
     st.title(app["title"])
     st.write(f"**Category:** {app['category']}")
     st.write(f"**Description:** {app['description']}")
+    st.markdown('<p style="font-size:20px; font-weight:bold;">Is this App Female centric?</p>', unsafe_allow_html=True)
     female_centric = st.radio(
-        "Is this App Female centric?",
+        "",
         ["Yes", "No"])
     return female_centric
 
