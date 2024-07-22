@@ -38,7 +38,7 @@ def show_app(index):
     if st.button("Save"):
         save_changes(index, female_centric)
         st.success("Changes saved successfully!")
-        time.sleep(5)  # Wait for 5 seconds
+        time.sleep(2)  # Wait for 5 seconds
         st.experimental_rerun() 
         
     return female_centric
