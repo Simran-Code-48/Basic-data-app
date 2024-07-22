@@ -27,10 +27,6 @@ def show_app(index):
     st.write(f"**Category:** {app['category']}")
     st.write(f"**Description:** {app['description']}")
     st.write(f"**Female centric:** {app['female_centric']}")
-    # female_centric = st.radio(
-    #     "Is this App Female centric?",
-    #     ["Yes", "No"],
-    #     captions=["Female centric", "Non-female centric"])
     female_centric = st.radio(
         "Is this App Female centric?",
         [True, False],
@@ -40,6 +36,7 @@ def show_app(index):
     )
     if st.button("Save"):
         save_changes(index, female_centric)
+        st.experimental_rereun()
         st.success("Changes saved successfully!")
         
         
