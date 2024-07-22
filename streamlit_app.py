@@ -1,25 +1,25 @@
 import streamlit as st
 import pandas as pd
-import BeautifulSoup as bs4
-import unidecode as unidecode
+# import BeautifulSoup as bs4
+# import unidecode as unidecode
 
 # Read CSV data
 @st.cache
 def load_data(file_path):
     return pd.read_csv(file_path)
 
-def clean_description(description):
-    # Remove HTML tags using BeautifulSoup
-    soup = BeautifulSoup(description, "html.parser")
-    text = soup.get_text()
-    # Convert special characters to ASCII
-    clean_text = unidecode(text)
-    return clean_text
+# def clean_description(description):
+#     # Remove HTML tags using BeautifulSoup
+#     soup = BeautifulSoup(description, "html.parser")
+#     text = soup.get_text()
+#     # Convert special characters to ASCII
+#     clean_text = unidecode(text)
+#     return clean_text
 # Load the data
 csv_file_path = 'top_apps_IN.csv'  # Update with the correct file path
 data = load_data(csv_file_path)
 
-data['description'] = data['description'].apply(clean_description)
+# data['description'] = data['description'].apply(clean_description)
 # Convert the DataFrame to a list of dictionaries
 apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
 
