@@ -31,4 +31,5 @@ git clone https://github.com/your-username/top-apps-dashboard.git
    streamlit
    pandas
    ```
-### 4. Run the app by running "python -m streamlit run streamlit_app.py"
+### 4. Run the app by running 
+   ```python -m streamlit run streamlit_app.py```
