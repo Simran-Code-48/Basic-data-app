@@ -1,7 +1,4 @@
 import streamlit as st
-import pandas as pd
-import math
-from pathlib import Path
 
 # Sample data for apps
 apps = [
@@ -20,9 +17,8 @@ def show_app(index):
     st.write(f"**Category:** {app['category']}")
     st.write(f"**Description:** {app['description']}")
     female_centric = st.radio(
-        "Is this App Female centric ? ",
-        ["Yes", "No"],
-        captions = ["Female Centric", "Not female centric"])
+        "Is this App Female centric?",
+        ["Yes", "No"])
     return female_centric
 
 def next_app():
@@ -33,14 +29,17 @@ def prev_app():
     if st.session_state.index > 0:
         st.session_state.index -= 1
 
+# Display current app
+female_centric = show_app(st.session_state.index)
 
-    # Display current app
-female_centric = show_app(2)
 # Navigation buttons
 col1, col2 = st.columns(2)
 with col1:
     if st.button("Previous"):
         prev_app()
+        st.experimental_rerun()
 with col2:
     if st.button("Next"):
         next_app()
+        st.experimental_rerun()
+
