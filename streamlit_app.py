@@ -33,6 +33,12 @@ def save_changes(index, female_centric):
     # Save to CSV
     data.to_csv(csv_file_path, index=False)
     
+    # Reload the data to check if changes were saved
+    updated_data = load_data(csv_file_path)
+    
+    # Debug statement to confirm changes
+    st.write(f"Reloaded DataFrame row:\n{updated_data.loc[data_index]}")
+    
 def show_app(index):
     app = apps[index]
     st.title(app["title"])
