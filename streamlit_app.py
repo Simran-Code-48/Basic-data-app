@@ -7,7 +7,7 @@ def load_data(file_path):
     return pd.read_csv(file_path)
 
 # Load the data
-csv_file_path = 'top_apps_IN_with_female_centric.csv'  # Update with the correct file path
+csv_file_path = 'top_apps_IN_with_female_centric.csv' 
 data = load_data(csv_file_path)
 
 apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
@@ -19,23 +19,14 @@ if 'index' not in st.session_state:
 # Function to save the updated data to the CSV file
 def save_changes(index, female_centric):
     st.write(f"Saving changes at index {index} with female_centric={female_centric}")
-    
-    # Ensure correct row is being updated
     app_name = apps[index]['title']
     data_index = data[data['appName'] == app_name].index[0]
-    
-    # Update the DataFrame
     data.at[data_index, 'female_centric'] = female_centric
-    
-    # Debug statement
     st.write(f"Updated DataFrame row:\n{data.loc[data_index]}")
-    
     # Save to CSV
     data.to_csv(csv_file_path, index=False)
-    
     # Reload the data to check if changes were saved
     updated_data = load_data(csv_file_path)
-    
     # Debug statement to confirm changes
     st.write(f"Reloaded DataFrame row:\n{updated_data.loc[data_index]}")
     
@@ -56,7 +47,7 @@ def show_app(index):
         save_changes(index, female_centric)
         st.success("Changes saved successfully!")
         time.sleep(2)  # Wait for 5 seconds
-        st.experimental_rerun() 
+        st.rerun() 
         
     return female_centric
 
