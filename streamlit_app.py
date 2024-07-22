@@ -7,7 +7,7 @@ def load_data(file_path):
     return pd.read_csv(file_path)
 
 # Load the data
-csv_file_path = 'top_apps_IN.csv'  # Update with the correct file path
+csv_file_path = 'top_apps_IN_with_female_centric.csv'  # Update with the correct file path
 data = load_data(csv_file_path)
 
 apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
