@@ -1,4 +1,5 @@
 import pandas as pd
+import streamlit as st
 import psycopg2 
 
 # Read CSV data
