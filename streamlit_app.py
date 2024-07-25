@@ -15,7 +15,7 @@ data['female_centric'] = data['female_centric'].astype(bool)  # Ensure boolean t
 # Select the first five rows for testing
 test_data = data.head(5)
 
-conn_string = st.secrets["conn_string"]
+conn_string = "postgresql://postgres:oismejK8yqzMD15z@resoundingly-victorious-rodent.data-1.use1.tembo.io:5432/postgres"
 
 # Connect to the existing database
 db_connection = psycopg2.connect(conn_string) # Replace with your database connection details
