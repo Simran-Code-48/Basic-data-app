@@ -25,21 +25,27 @@ def insert_data(df, db_connection):
     
     # Insert new data
     for index, row in df.iterrows():
-        cursor.execute('''
-            INSERT INTO apps (
-                id, package, appName, description, category, packageId, userCount, female_centric
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-        ''', (
-            index + 1,  # Assuming you want to start IDs from 1
-            row['package'],
-            row['appName'],
-            row['description'],
-            row['category'],
-            row['packageId'],
-            row['userCount'],
-            row['female_centric']
-        ))
-    db_connection.commit()
+        try:
+            cursor.execute('''
+                INSERT INTO apps (
+                    id, package, appName, description, category, packageId, userCount, female_centric
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            ''', (
+                index + 1,  # Assuming you want to start IDs from 1
+                row['package'],
+                row['appName'],
+                row['description'],
+                row['category'],
+                row['packageId'],
+                row['userCount'],
+                row['female_centric']
+            ))
+        except psycopg2.DataError as e:
+            print(f"Error inserting row {index}: {e}")
+            print(f"Row data: {row}")
+        except Exception as e:
+            print(f"Unexpected error: {e}")
+    conn.commit()
     cursor.close()
 
 # Streamlit app
