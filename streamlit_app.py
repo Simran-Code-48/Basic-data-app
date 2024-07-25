@@ -1,5 +1,5 @@
-import streamlit as st
 import pandas as pd
+import sqlite3  # Change to the appropriate library for your database
 
 # Read CSV data
 def load_data(file_path):
@@ -9,37 +9,40 @@ def load_data(file_path):
 csv_file_path = 'top_apps_IN_with_female_centric.csv'
 data = load_data(csv_file_path)
 
-# Initialize session state if not already set
-if 'row_index' not in st.session_state:
-    st.session_state.row_index = 0
+# Convert data types as required for the database schema
+data['female_centric'] = data['female_centric'].astype(bool)  # Ensure boolean type
 
-# Display the current row's data
-current_row = data.iloc[st.session_state.row_index]
-st.write("Current row data:")
-st.write(current_row)
+# Select the first five rows for testing
+test_data = data.head(5)
 
-# Display the value of the female_centric column
-female_centric_value = current_row['female_centric']
-st.write("Value of female_centric for the current row:")
-st.write(female_centric_value)
+# Connect to the existing database
+db_connection = sqlite3.connect('apps.db')  # Replace with your database connection details
 
-# Check and display the data type of female_centric
-female_centric_dtype = data['female_centric'].dtype
-st.write("Data type of female_centric column:")
-st.write(female_centric_dtype)
+# Define a function to insert data into the existing table
+def insert_data(df, db_connection):
+    with db_connection.cursor() as cursor:
+        for index, row in df.iterrows():
+            cursor.execute('''
+                INSERT OR REPLACE INTO apps (
+                    package, appName, description, category, packageId, userCount, female_centric
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                row['package'],
+                row['appName'],
+                row['description'],
+                row['category'],
+                row['packageId'],
+                row['userCount'],
+                row['female_centric']
+            ))
+        db_connection.commit()
 
-# Navigation buttons
-col1, col2 = st.columns([1, 3])
+# Insert only the first five rows into the existing table
+insert_data(test_data, db_connection)
 
-with col1:
-    if st.button('Previous'):
-        if st.session_state.row_index > 0:
-            st.session_state.row_index -= 1
+# Close the database connection
+db_connection.close()
 
-with col2:
-    if st.button('Next'):
-        if st.session_state.row_index < len(data) - 1:
-            st.session_state.row_index += 1
 
 # apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
 
