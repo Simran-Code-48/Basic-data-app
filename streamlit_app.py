@@ -63,7 +63,7 @@ def prev_app():
 # Display current app
 female_centric = show_app(st.session_state.index)
 
-Navigation buttons
+# Navigation buttons
 col1, col2 = st.columns(2)
 with col1:
     if st.button("Previous"):
