@@ -14,7 +14,7 @@ data = load_data(csv_file_path)
 data['female_centric'] = data['female_centric'].astype(bool)  # Ensure boolean type
 
 # Connect to the existing database
-conn_string = "postgresql://postgres:oismejK8yqzMD15z@resoundingly-victorious-rodent.data-1.use1.tembo.io:5432/postgres"
+conn_string = "postgresql://postgres:vuVz8CHHc5kCz7b9@faintly-first-willet.data-1.use1.tembo.io:5432/postgres"
 conn = psycopg2.connect(conn_string)  # Replace with your database connection details
 
 def insert_data(df, db_connection):
