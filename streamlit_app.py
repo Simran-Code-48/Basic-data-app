@@ -18,33 +18,32 @@ test_data = data.head(5)
 conn_string = "postgresql://postgres:oismejK8yqzMD15z@resoundingly-victorious-rodent.data-1.use1.tembo.io:5432/postgres"
 
 # Connect to the existing database
-db_connection = psycopg2.connect(conn_string) # Replace with your database connection details
-
-# Define a function to insert data into the existing table
+conn = psycopg2.connect(conn_string) # Replace with your database connection details
 def insert_data(df, db_connection):
-    with db_connection.cursor() as cursor:
-        for index, row in df.iterrows():
-            cursor.execute('''
-                INSERT INTO apps (
-                    id,package, appName, description, category, packageId, userCount, female_centric
-                ) VALUES (?, ?, ?, ?, ?, ?, ?)
-            ''', (
-                index,
-                row['package'],
-                row['appName'],
-                row['description'],
-                row['category'],
-                row['packageId'],
-                row['userCount'],
-                row['female_centric']
-            ))
-        db_connection.commit()
+    cursor = db_connection.cursor()
+    for index, row in df.iterrows():
+        cursor.execute('''
+            INSERT INTO apps (
+                id, package, appName, description, category, packageId, userCount, female_centric
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        ''', (
+            index,
+            row['package'],
+            row['appName'],
+            row['description'],
+            row['category'],
+            row['packageId'],
+            row['userCount'],
+            row['female_centric']
+        ))
+    db_connection.commit()
+    cursor.close()
 
 # Insert only the first five rows into the existing table
-insert_data(test_data, db_connection)
+insert_data(test_data, conn)
 
 # Close the database connection
-db_connection.close()
+conn.close()
 
 
 # apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
