@@ -26,9 +26,10 @@ def insert_data(df, db_connection):
         for index, row in df.iterrows():
             cursor.execute('''
                 INSERT INTO apps (
-                    package, appName, description, category, packageId, userCount, female_centric
+                    id,package, appName, description, category, packageId, userCount, female_centric
                 ) VALUES (?, ?, ?, ?, ?, ?, ?)
             ''', (
+                index,
                 row['package'],
                 row['appName'],
                 row['description'],
