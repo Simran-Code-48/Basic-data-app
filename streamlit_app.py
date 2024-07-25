@@ -90,12 +90,12 @@ with col2:
 # female_centric = show_app(st.session_state.index)
 
 # Navigation buttons
-col1, col2 = st.columns(2)
-with col1:
-    if st.button("Previous"):
-        prev_app()
-        st.rerun()
-with col2:
-    if st.button("Next"):
-        next_app()
-        st.rerun()
+# col1, col2 = st.columns(2)
+# with col1:
+#     if st.button("Previous"):
+#         prev_app()
+#         st.rerun()
+# with col2:
+#     if st.button("Next"):
+#         next_app()
+#         st.rerun()
