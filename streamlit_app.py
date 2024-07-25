@@ -10,10 +10,32 @@ def load_data(file_path):
 csv_file_path = 'top_apps_IN_with_female_centric.csv' 
 data = load_data(csv_file_path)
 
-# Display the first few rows of the DataFrame
-st.write("Here's a preview of the CSV data:")
-st.write(data.head())
 
+# Initialize session state if not already set
+if 'row_index' not in st.session_state:
+    st.session_state.row_index = 0
+
+# Display the current row's data
+current_row = data.iloc[st.session_state.row_index]
+st.write("Current row data:")
+st.write(current_row)
+
+# Display the value of the female_centric column
+st.write("Value of female_centric for the current row:")
+st.write(current_row['female_centric'])  # Adjust column name as necessary
+
+# Navigation buttons
+col1, col2 = st.columns([1, 3])
+
+with col1:
+    if st.button('Previous'):
+        if st.session_state.row_index > 0:
+            st.session_state.row_index -= 1
+
+with col2:
+    if st.button('Next'):
+        if st.session_state.row_index < len(data) - 1:
+            st.session_state.row_index += 1
 # apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
 
 # # Initialize session state for app index
