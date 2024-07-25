@@ -1,5 +1,5 @@
 import pandas as pd
-import sqlite3  # Change to the appropriate library for your database
+import psycopg2 
 
 # Read CSV data
 def load_data(file_path):
@@ -15,8 +15,10 @@ data['female_centric'] = data['female_centric'].astype(bool)  # Ensure boolean t
 # Select the first five rows for testing
 test_data = data.head(5)
 
+conn_string = st.secrets["conn_string"]
+
 # Connect to the existing database
-db_connection = sqlite3.connect('apps.db')  # Replace with your database connection details
+db_connection = psycopg2.connect(conn_string) # Replace with your database connection details
 
 # Define a function to insert data into the existing table
 def insert_data(df, db_connection):
