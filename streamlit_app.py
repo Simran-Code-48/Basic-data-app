@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-import psycopg2 
+import psycopg2
 
 # Read CSV data
 def load_data(file_path):
@@ -13,22 +13,24 @@ data = load_data(csv_file_path)
 # Convert data types as required for the database schema
 data['female_centric'] = data['female_centric'].astype(bool)  # Ensure boolean type
 
-# Select the first five rows for testing
-test_data = data.head(5)
-
-conn_string = "postgresql://postgres:oismejK8yqzMD15z@resoundingly-victorious-rodent.data-1.use1.tembo.io:5432/postgres"
-
 # Connect to the existing database
-conn = psycopg2.connect(conn_string) # Replace with your database connection details
+conn_string = "postgresql://postgres:oismejK8yqzMD15z@resoundingly-victorious-rodent.data-1.use1.tembo.io:5432/postgres"
+conn = psycopg2.connect(conn_string)  # Replace with your database connection details
+
 def insert_data(df, db_connection):
     cursor = db_connection.cursor()
+    
+    # Delete all existing data
+    cursor.execute('DELETE FROM apps')
+    
+    # Insert new data
     for index, row in df.iterrows():
         cursor.execute('''
             INSERT INTO apps (
                 id, package, appName, description, category, packageId, userCount, female_centric
             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
         ''', (
-            index+1,
+            index + 1,  # Assuming you want to start IDs from 1
             row['package'],
             row['appName'],
             row['description'],
@@ -40,13 +42,12 @@ def insert_data(df, db_connection):
     db_connection.commit()
     cursor.close()
 
-# Insert only the first five rows into the existing table
-if st.button('Insert'):
-    insert_data(test_data, conn)
+# Streamlit app
+if st.button('Insert All Data'):
+    insert_data(data, conn)
 
 # Close the database connection
 conn.close()
-
 
 # apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
 
