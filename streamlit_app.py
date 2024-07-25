@@ -27,7 +27,7 @@ def insert_data(df, db_connection):
                 id, package, appName, description, category, packageId, userCount, female_centric
             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
         ''', (
-            index,
+            index+1,
             row['package'],
             row['appName'],
             row['description'],
@@ -40,7 +40,8 @@ def insert_data(df, db_connection):
     cursor.close()
 
 # Insert only the first five rows into the existing table
-insert_data(test_data, conn)
+if st.button('Insert'):
+    insert_data(test_data, conn)
 
 # Close the database connection
 conn.close()
