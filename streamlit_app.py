@@ -25,7 +25,7 @@ def insert_data(df, db_connection):
     with db_connection.cursor() as cursor:
         for index, row in df.iterrows():
             cursor.execute('''
-                INSERT OR REPLACE INTO apps (
+                INSERT INTO apps (
                     package, appName, description, category, packageId, userCount, female_centric
                 ) VALUES (?, ?, ?, ?, ?, ?, ?)
             ''', (
