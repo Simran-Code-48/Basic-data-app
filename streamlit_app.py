@@ -1,15 +1,13 @@
 import streamlit as st
 import pandas as pd
-import time
 
 # Read CSV data
 def load_data(file_path):
     return pd.read_csv(file_path)
 
 # Load the data
-csv_file_path = 'top_apps_IN_with_female_centric.csv' 
+csv_file_path = 'top_apps_IN_with_female_centric.csv'
 data = load_data(csv_file_path)
-
 
 # Initialize session state if not already set
 if 'row_index' not in st.session_state:
@@ -21,8 +19,14 @@ st.write("Current row data:")
 st.write(current_row)
 
 # Display the value of the female_centric column
+female_centric_value = current_row['female_centric']
 st.write("Value of female_centric for the current row:")
-st.write(current_row['female_centric'])  # Adjust column name as necessary
+st.write(female_centric_value)
+
+# Check and display the data type of female_centric
+female_centric_dtype = data['female_centric'].dtype
+st.write("Data type of female_centric column:")
+st.write(female_centric_dtype)
 
 # Navigation buttons
 col1, col2 = st.columns([1, 3])
@@ -36,6 +40,7 @@ with col2:
     if st.button('Next'):
         if st.session_state.row_index < len(data) - 1:
             st.session_state.row_index += 1
+
 # apps = data.rename(columns={"appName": "title"}).to_dict(orient="records")
 
 # # Initialize session state for app index
